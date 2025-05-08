@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modern Login Form</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    animation: {
+                        'gradient': 'gradient 8s linear infinite',
+                    },
+                    keyframes: {
+                        'gradient': {
+                            to: { 'background-position': '200% center' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        .animate-gradient {
+            background: linear-gradient(
+                90deg,
+                #3b82f6,
+                #8b5cf6,
+                #3b82f6
+            );
+            background-size: 200% auto;
+        }
+        .error-shake {
+            animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+        }
+        @keyframes shake {
+            10%, 90% { transform: translate3d(-1px, 0, 0); }
+            20%, 80% { transform: translate3d(2px, 0, 0); }
+            30%, 50%, 70% { transform: translate3d(-2px, 0, 0); }
+            40%, 60% { transform: translate3d(2px, 0, 0); }
+        }
+        .ripple {
+            position: relative;
+            overflow: hidden;
+        }
+        .ripple:after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            background-image: radial-gradient(circle, #fff 10%, transparent 10.01%);
+            background-repeat: no-repeat;
+            background-position: 50%;
+            transform: scale(10, 10);
+            opacity: 0;
+            transition: transform .5s, opacity 1s;
+        }
+        .ripple:active:after {
+            transform: scale(0, 0);
+            opacity: .3;
+            transition: 0s;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+    <div class="w-full max-w-md">
+        <div class="glass rounded-2xl shadow-2xl p-8 space-y-6">
+            <h1 class="text-3xl font-bold text-transparent bg-clip-text animate-gradient animate-gradient bg-gradient-to-r from-blue-400 to-purple-400 text-center">Login</h1>
+            
+            <form id="loginForm" class="space-y-6" novalidate>
+                <div class="space-y-4">
+                    <div class="space-y-2">
+                        <label for="email" class="block text-sm font-medium text-gray-200">Email</label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            class="w-full px-4 py-2 glass rounded-lg text-white placeholder-gray-400 border border-gray-600 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none transition duration-200"
+                            placeholder="Enter your email"
+                        >
+                        <p class="error-message hidden text-sm text-red-400 mt-1"></p>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label for="password" class="block text-sm font-medium text-gray-200">Password</label>
+                        <input 
+                            type="password" 
+                            id="password" 
+                            class="w-full px-4 py-2 glass rounded-lg text-white placeholder-gray-400 border border-gray-600 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none transition duration-200"
+                            placeholder="Enter your password"
+                        >
+                        <p class="error-message hidden text-sm text-red-400 mt-1"></p>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between">
+                    <label class="flex items-center space-x-2">
+                        <input type="checkbox" class="rounded glass border-gray-600 text-blue-500 focus:ring-blue-500">
+                        <span class="text-sm text-gray-300">Remember me</span>
+                    </label>
+                    <a href="#" class="text-sm text-blue-400 hover:text-blue-300 transition-colors">Forgot Password?</a>
+                </div>
+
+                <button 
+                    type="submit"
+                    class="ripple w-full py-2 rounded-lg text-white font-medium animate-gradient bg-gradient-to-r from-blue-500 to-purple-500 hover:opacity-90 transition duration-200 transform hover:scale-[1.02]"
+                >
+                    Sign in
+                </button>
+
+                <p class="text-center text-sm text-gray-400">
+                    Don't have an account? 
+                    <a href="#" class="text-blue-400 hover:text-blue-300 font-medium transition-colors">Sign up</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('loginForm');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+
+        const showError = (input, message) => {
+            const errorElement = input.nextElementSibling;
+            errorElement.textContent = message;
+            errorElement.classList.remove('hidden');
+            input.classList.add('border-red-500');
+            input.parentElement.classList.add('error-shake');
+            setTimeout(() => input.parentElement.classList.remove('error-shake'), 500);
+        };
+
+        const hideError = (input) => {
+            const errorElement = input.nextElementSibling;
+            errorElement.classList.add('hidden');
+            input.classList.remove('border-red-500');
+        };
+
+        const validateEmail = (email) => {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        };
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            let isValid = true;
+
+            hideError(emailInput);
+            hideError(passwordInput);
+
+            if (!emailInput.value.trim()) {
+                showError(emailInput, 'Email is required');
+                isValid = false;
+            } else if (!validateEmail(emailInput.value.trim())) {
+                showError(emailInput, 'Please enter a valid email');
+                isValid = false;
+            }
+
+            if (!passwordInput.value.trim()) {
+                showError(passwordInput, 'Password is required');
+                isValid = false;
+            } else if (passwordInput.value.length < 6) {
+                showError(passwordInput, 'Password must be at least 6 characters');
+                isValid = false;
+            }
+
+            if (isValid) {
+                // Handle form submission
+                console.log('Form submitted successfully');
+            }
+        });
+
+        // Clear errors on input
+        [emailInput, passwordInput].forEach(input => {
+            input.addEventListener('input', () => hideError(input));
+        });
+    </script>
+</body>
+</html>
