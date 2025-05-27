@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Character Counter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      text-align: center;
+      background-color: skyblue;
+    }
+    #char-count {
+      margin-top: 5px;
+      font-size: 14px;
+      color: #555;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <label for="input-text">Type something:</label>
+  <br>
+  <input type="text" id="input-text" maxlength="100" />
+  <div id="char-count">Characters: 0</div>
+
+  <script>
+    const input = document.getElementById('input-text');
+    const counter = document.getElementById('char-count');
+
+    input.addEventListener('input', () => {
+      const length = input.value.length;
+      counter.textContent = `Characters: ${length}`;
+    });
+  </script>
+
+</body>
+</html>
