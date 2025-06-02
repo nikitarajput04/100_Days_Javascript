@@ -1,4 +1,4 @@
-const message = "Hello, my self nikikta !";
+const message = "Hello, my self nikita !";
 
 if (message.includes("self")) {
   console.log("The word 'self ' is in the message.");
