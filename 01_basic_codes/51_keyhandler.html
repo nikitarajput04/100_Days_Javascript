@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Keyboard Event Handler</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 100px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Press any key</h1>
+  <p id="output">Waiting for key press...</p>
+
+  <script>
+    document.addEventListener('keydown', function(event) {
+      const key = event.key;
+      const keyCode = event.keyCode || event.which;
+
+      document.getElementById('output').innerText = 
+        `Key pressed: ${key} | Key code: ${keyCode}`;
+    });
+  </script>
+
+</body>
+</html>
