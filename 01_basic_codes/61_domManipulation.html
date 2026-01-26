@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <title>DOM Manipulation Example</title>
+   <script>
+      function changeText() {
+          document.getElementById("heading").innerText = "Hello Nikita!";
+      }
+
+      function changeColor() {
+          document.getElementById("heading").style.color = "blue";
+      }
+
+      function addItem() {
+          let ul = document.getElementById("list");
+          let li = document.createElement("li");
+          li.innerText = "New Item";
+          ul.appendChild(li);
+      }
+
+      function removeItem() {
+          let ul = document.getElementById("list");
+          let li = ul.lastElementChild;
+          ul.removeChild(li);
+      }
+   </script>
+</head>
+<body>
+   <h1 id="heading">Welcome</h1>
+   <button onclick="changeText()">Change Text</button>
+   <button onclick="changeColor()">Change Color</button>
+
+   <h2>Items List</h2>
+   <ul id="list">
+      <li>Item 1</li>
+      <li>Item 2</li>
+   </ul>
+   <button onclick="addItem()">Add Item</button>
+   <button onclick="removeItem()">Remove Last Item</button>
+</body>
+</html>
