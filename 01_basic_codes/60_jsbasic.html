@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS DOM Example</title>
+    <style>
+        /* Simple styling */
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f0f8ff;
+            text-align: center;
+        }
+
+        #demo {
+            font-size: 20px;
+            color: blue;
+            margin: 20px 0;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #357a38;
+        }
+    </style>
+</head>
+<body>
+
+    <p id="demo">Hello!</p>
+    <button id="myBtn">Click Me</button>
+
+    <script>
+        // Access the paragraph element
+        let para = document.getElementById("demo");
+
+        // Change initial content and style
+        para.innerHTML = "Welcome to my website";
+        para.style.color = "green";
+
+        // Access the button element
+        let btn = document.getElementById("myBtn");
+
+        // Add click event to button
+        btn.addEventListener("click", function() {
+            para.innerHTML = "Button Clicked!";
+            para.style.fontWeight = "bold";
+            para.style.color = "red"; // optional, makes it more visible
+        });
+
+        // Create a new paragraph dynamically
+        let newPara = document.createElement("p");
+        newPara.innerHTML = "This is a dynamically added paragraph.";
+        newPara.style.fontStyle = "italic";
+        newPara.style.color = "#333";
+        document.body.appendChild(newPara);
+    </script>
+
+</body>
+</html>
