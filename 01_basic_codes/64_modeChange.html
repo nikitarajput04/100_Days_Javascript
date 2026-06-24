@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>toggle button</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center; /* Horizontal center */
+        align-items: center; /* Vertical center */
+        height: 100vh;
+      }
+      #mode {
+        background-color: wheat;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      #mode:hover {
+        transform: scale(1.05);
+      }
+    </style>
+  </head>
+  <body>
+    <button id="mode">click mee</button>
+    <script>
+      let modeBtn = document.querySelector("#mode");
+      let currMode = "light";
+      modeBtn.addEventListener("click", () => {
+        if (currMode === "light") {
+          currMode = "dark";
+          modeBtn.innerText = "🌙 Dark Mode";
+
+          document.querySelector("body").style.backgroundColor = "black";
+        } else {
+          currMode = "light";
+          modeBtn.innerText = "☀️ Light Mode";
+
+          document.querySelector("body").style.backgroundColor = "white";
+        }
+        console.log(currMode);
+      });
+    </script>
+  </body>
+</html>
